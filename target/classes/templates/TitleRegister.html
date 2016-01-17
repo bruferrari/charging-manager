@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Title Register</title>
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="/css/styles.css"/>
+</head>
+<body>
+
+	<nav class="navbar navbar-inverse navbar-static-top">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <a class="navbar-brand" href="#">
+	        <img alt="Algaworks" src="/images/logo-algaworks.png" />
+	      </a>
+	    </div>
+	  </div>
+	</nav>
+
+	<form class="form-horizontal" method="POST" action="/titles">
+	
+		<div class="alert alert-success" th:if="${!#strings.isEmpty(message)}">
+			<span th:text="${message}"></span>
+		</div>
+	
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h1 class="panel-title">New Title</h1>
+			</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<label for="description" class="col-sm-2 control-label">Description</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control" id="description" name="description" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label" for="expirationDate">Due Date</label>
+					<div class="col-sm-2">
+						<input type="text" class="form-control" id="expirationDate" name="expirationDate" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label" for="amount">Amount</label>
+					<div class="col-sm-2">
+						<input type="text" class="form-control" id="amount" name="amount" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label" for="status">Status</label>
+					<div class="col-sm-2">
+						<select class="form-control" name="status">
+							<option value="PENDING">Pending</option>
+							<option value="RECEIVED">Received</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button type="submit" class="btn btn-primary">Save</button>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</form>
+
+<script src="/js/bootstrap.min.js"></script>
+</body>
+</html>
