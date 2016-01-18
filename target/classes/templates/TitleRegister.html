@@ -52,8 +52,7 @@
 					<label class="col-sm-2 control-label" for="status">Status</label>
 					<div class="col-sm-2">
 						<select class="form-control" name="status">
-							<option value="PENDING">Pending</option>
-							<option value="RECEIVED">Received</option>
+							<option th:each="status : ${allTitleStatuses}" th:value="${status}" th:text="${status.description}"></option>
 						</select>
 					</div>
 				</div>
@@ -67,6 +66,7 @@
 		</div>
 	</form>
 
+<script src="/js/jquery-2.2.0.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 </body>
 </html>
