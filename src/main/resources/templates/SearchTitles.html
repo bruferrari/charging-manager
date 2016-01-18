@@ -1,30 +1,22 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:th="http://www.thymeleaf.org">
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorator="DefaultLayout">
 <head>
-	<meta charset="UTF-8" />
 	<title>Titles Search</title>
-	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
-	<link rel="stylesheet" type="text/css" href="/css/styles.css"/>
 </head>
 
-<body>
-
-	<nav class="navbar navbar-inverse navbar-static-top">
-	  <div class="container-fluid">
-	    <div class="navbar-header">
-	      <a class="navbar-brand" href="#">
-	        <img alt="Algaworks" src="/images/logo-algaworks.png" />
-	      </a>
-	    </div>
-	  </div>
-	</nav>
+<section layout:fragment="content">
 
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<h1 class="panel-title">Titles Search</h1>
+			<div class="clearfix">
+				<h1 class="panel-title f-title-panel">Titles Search</h1>
+				<a class="btn btn-link f-link-panel" href="/titles/new">New Title</a>
+			</div>
 		</div>
-		
+			
 		<div class="panel-body">
 			<table class="table table-bordered table-striped">
 				<thead>
@@ -42,12 +34,9 @@
 				</tbody>
 			</table>		
 		</div>
-		
 	</div>
-	
-<script src="/js/jquery-2.2.0.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-</body>
+
+</section>
 </html>
 
 

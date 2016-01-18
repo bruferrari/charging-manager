@@ -1,24 +1,13 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:th="http://www.thymeleaf.org">
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorator="DefaultLayout">
 <head>
-<meta charset="UTF-8" />
 <title>Title Register</title>
-<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
-<link rel="stylesheet" type="text/css" href="/css/styles.css"/>
 </head>
-<body>
 
-	<nav class="navbar navbar-inverse navbar-static-top">
-	  <div class="container-fluid">
-	    <div class="navbar-header">
-	      <a class="navbar-brand" href="#">
-	        <img alt="Algaworks" src="/images/logo-algaworks.png" />
-	      </a>
-	    </div>
-	  </div>
-	</nav>
-
+<section layout:fragment="content">
 	<form class="form-horizontal" method="POST" action="/titles">
 	
 		<div class="alert alert-success" th:if="${!#strings.isEmpty(message)}">
@@ -27,7 +16,10 @@
 	
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h1 class="panel-title">New Title</h1>
+				<div class="clearfix">
+					<h1 class="panel-title f-title-panel">New Title</h1>
+					<a class="btn btn-link f-link-panel" href="/titles">Back to search</a>
+				</div>
 			</div>
 			<div class="panel-body">
 				<div class="form-group">
@@ -66,7 +58,5 @@
 		</div>
 	</form>
 
-<script src="/js/jquery-2.2.0.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-</body>
+</section>
 </html>
