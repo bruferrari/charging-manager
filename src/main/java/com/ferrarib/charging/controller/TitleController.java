@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,14 +26,20 @@ public class TitleController {
 	@RequestMapping("/new")
 	public ModelAndView newRegister() {
 		ModelAndView mv = new ModelAndView("TitleRegister");
+		mv.addObject(new Title());
 		return mv;
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public ModelAndView salvar(Title title) {
-		System.out.println(">>>>" + title.getDescription());
-		titles.save(title);
+	public ModelAndView salvar(@Validated Title title, Errors errors) {
 		ModelAndView mv = new ModelAndView("TitleRegister");
+		
+		if(errors.hasErrors()) {
+			return mv;
+		}
+		
+		titles.save(title);
+		
 		mv.addObject("message", title.getDescription() + " has been stored with success!");
 		return mv;
 	}

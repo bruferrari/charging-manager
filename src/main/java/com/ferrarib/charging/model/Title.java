@@ -10,7 +10,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
 
@@ -20,12 +25,19 @@ public class Title {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@NotEmpty(message="Description is required")
+	@Size(max = 60, message="Description must not have more than 60 characters")
 	private String description;
 
+	@NotNull(message="Expiration date is required")
 	@DateTimeFormat(pattern="dd/MM/yyyy")
 	@Temporal(TemporalType.DATE)
 	private Date expirationDate;
 	
+	@NotNull(message="Amount is required")
+	@DecimalMin(value = "0.01", message="Amount cannot be less than 0,01")
+	@DecimalMax(value = "9999999.99", message="Amount cannot be greater than 9.999.999.999,99")
 	@NumberFormat(pattern="#,##0.00")
 	private BigDecimal amount;
 

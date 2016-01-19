@@ -8,11 +8,9 @@
 </head>
 
 <section layout:fragment="content">
-	<form class="form-horizontal" method="POST" action="/titles">
+	<form class="form-horizontal" method="POST" action="/titles" th:object="${title}">
 	
-		<div class="alert alert-success" th:if="${!#strings.isEmpty(message)}">
-			<span th:text="${message}"></span>
-		</div>
+		<div layout:include="RegisterMessage"></div>
 	
 		<div class="panel panel-default">
 			<div class="panel-heading">
@@ -22,19 +20,19 @@
 				</div>
 			</div>
 			<div class="panel-body">
-				<div class="form-group">
+				<div class="form-group" th:classappend="${#fields.hasErrors('description')} ? has-error">
 					<label for="description" class="col-sm-2 control-label">Description</label>
 					<div class="col-sm-4">
 						<input type="text" class="form-control" id="description" name="description" />
 					</div>
 				</div>
-				<div class="form-group">
+				<div class="form-group" th:classappend="${#fields.hasErrors('expirationDate')} ? has-error">
 					<label class="col-sm-2 control-label" for="expirationDate">Due Date</label>
 					<div class="col-sm-2">
 						<input type="text" class="form-control" id="expirationDate" name="expirationDate" />
 					</div>
 				</div>
-				<div class="form-group">
+				<div class="form-group" th:classappend="${#fields.hasErrors('amount')} ? has-error">
 					<label class="col-sm-2 control-label" for="amount">Amount</label>
 					<div class="col-sm-2">
 						<input type="text" class="form-control" id="amount" name="amount" />
