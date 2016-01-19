@@ -24,7 +24,6 @@ public class TitleController {
 	@RequestMapping("/new")
 	public ModelAndView newRegister() {
 		ModelAndView mv = new ModelAndView("TitleRegister");
-//		mv.addObject("allTitleStatuses", TitleStatus.values());
 		return mv;
 	}
 	
@@ -38,8 +37,12 @@ public class TitleController {
 	}
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public String search() {
-		return "SearchTitles";
+	public ModelAndView search() {
+		List<Title> allTitles = titles.findAll();
+		
+		ModelAndView mv = new ModelAndView("SearchTitles");
+		mv.addObject("titles", allTitles);
+		return mv;
 	}
 	
 	@ModelAttribute("allTitleStatuses")

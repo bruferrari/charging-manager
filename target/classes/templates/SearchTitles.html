@@ -30,7 +30,23 @@
 					</tr>
 				</thead>
 				<tbody>
-					<td colspan="6">No records found</td>
+					<tr th:each="title : ${titles}">
+						<td class="text-center" th:text="${title.id}"></td>
+						<td th:text="${title.description}"></td>
+						<td class="text-center" th:text="${{title.expirationDate}}"></td>
+						<td class="text-right" th:text="|R$ ${{title.amount}}|"></td>
+						<td class="text-center">
+							<span class="label" th:text="${title.status.description}"
+								th:classappend="${(title.pending) ? 'label-danger' : 'label-success'}"></span>
+						</td>
+						<td class="text-center">
+							
+						</td>
+					</tr>
+				
+					<tr>
+						<td colspan="6" th:if="${#lists.isEmpty(titles)}">No records found</td>
+					</tr>
 				</tbody>
 			</table>		
 		</div>

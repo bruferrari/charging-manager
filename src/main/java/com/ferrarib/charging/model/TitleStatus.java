@@ -3,8 +3,7 @@ package com.ferrarib.charging.model;
 public enum TitleStatus {
 
 	PENDING("Pending"), 
-	RECEIVED("Received"),
-	CANCELED("Canceled");
+	RECEIVED("Received");
 
 	private String description;
 

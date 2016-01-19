@@ -71,6 +71,10 @@ public class Title {
 	public void setStatus(TitleStatus status) {
 		this.status = status;
 	}
+	
+	public boolean isPending() {
+		return TitleStatus.PENDING.equals(this.status);
+	}
 
 	@Override
 	public int hashCode() {
