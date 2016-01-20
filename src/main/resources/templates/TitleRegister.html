@@ -10,7 +10,8 @@
 <section layout:fragment="content">
 	<form class="form-horizontal" method="POST" action="/titles" th:object="${title}">
 	
-		<div layout:include="RegisterMessage"></div>
+		<div layout:include="DefaultMessage"></div>
+		<div layout:include="MessageError"></div>
 	
 		<div class="panel panel-default">
 			<div class="panel-heading">

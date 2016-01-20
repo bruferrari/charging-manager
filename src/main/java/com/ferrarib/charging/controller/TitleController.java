@@ -63,9 +63,30 @@ public class TitleController {
 		return mv;
 	}
 	
+	@RequestMapping(value="{id}", method=RequestMethod.DELETE)
+	public String remove(@PathVariable Long id, RedirectAttributes attr) {
+		titles.delete(id);
+		
+		attr.addFlashAttribute("message", "Title has been removed with success!");
+		return "redirect:/titles";
+	}
+	
 	@ModelAttribute("allTitleStatuses")
 	public List<TitleStatus> allTitleStatus() {
 		return Arrays.asList(TitleStatus.values());
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
