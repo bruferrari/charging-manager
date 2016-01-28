@@ -14,3 +14,7 @@ $('#confirmRemoveModal').on('show.bs.modal', function(event) {
 	modal.find('.modal-body span').html('Do you want to remove title <strong>' + titleDescription + '</strong>?');
 	
 });
+
+$(function() {
+	$('[rel="tooltip"]').tooltip();
+});

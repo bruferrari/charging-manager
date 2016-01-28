@@ -32,7 +32,9 @@
 				<div class="form-group" th:classappend="${#fields.hasErrors('expirationDate')} ? has-error">
 					<label class="col-sm-2 control-label" for="expirationDate">Due Date</label>
 					<div class="col-sm-2">
-						<input type="text" class="form-control" id="expirationDate" th:field="*{expirationDate}" />
+						<input type="text" class="form-control" id="expirationDate" th:field="*{expirationDate}"
+							data-provide="datepicker" data-date-format="dd/mm/yyyy" data-auto-close="true" 
+							data-date-today-highlight="true" data-date-orientation="bottom"/>
 					</div>
 				</div>
 				<div class="form-group" th:classappend="${#fields.hasErrors('amount')} ? has-error">

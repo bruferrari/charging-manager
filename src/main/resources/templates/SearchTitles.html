@@ -42,12 +42,14 @@
 								th:classappend="${(title.pending) ? 'label-danger' : 'label-success'}"></span>
 						</td>
 						<td class="text-center">
-							<a class="btn btn-link btn-xs" th:href="@{/titles/{id}(id=${title.id})}">
+							<a class="btn btn-link btn-xs" th:href="@{/titles/{id}(id=${title.id})}" title="Edit" 
+								rel="tooltip" data-placement="top">
 								<span class="glyphicon glyphicon-pencil"></span>
 							</a>
 							
 							<a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmRemoveModal"
-								th:attr="data-id=${title.id}, data-description=${title.description}">
+								th:attr="data-id=${title.id}, data-description=${title.description}" title="Remove"
+								rel="tooltip" data-placement="top">
 								<span class="glyphicon glyphicon-remove"></span>
 							</a>
 						</td>

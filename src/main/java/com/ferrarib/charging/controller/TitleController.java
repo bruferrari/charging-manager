@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
@@ -35,16 +36,20 @@ public class TitleController {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public String salvar(@Validated Title title, Errors errors, RedirectAttributes attributes) {
+	public String save(@Validated Title title, Errors errors, RedirectAttributes attributes) {
 		
 		if(errors.hasErrors()) {
 			return REGISTER_VIEW;
 		}
-		
-		titles.save(title);
-		
-		attributes.addFlashAttribute("message", title.getDescription() + " has been stored with success!");
-		return "redirect:/titles/new"; 
+		try {
+			titles.save(title);
+			attributes.addFlashAttribute("message", title.getDescription() + " has been stored with success!");
+			return "redirect:/titles/new"; 
+		} catch (DataIntegrityViolationException e) {
+			errors.rejectValue("expirationDate", null, "Invalid title date.");
+			return REGISTER_VIEW;
+		}
+
 	}
 	
 	@RequestMapping(method=RequestMethod.GET)
