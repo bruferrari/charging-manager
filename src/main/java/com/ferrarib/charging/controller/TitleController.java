@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
@@ -18,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.ferrarib.charging.model.Title;
 import com.ferrarib.charging.model.TitleStatus;
 import com.ferrarib.charging.repository.Titles;
+import com.ferrarib.charging.service.TitleRegisterService;
 
 @Controller
 @RequestMapping("/titles")
@@ -27,6 +27,9 @@ public class TitleController {
 	
 	@Autowired
 	private Titles titles;
+	
+	@Autowired
+	private TitleRegisterService titleRegisterService;
 
 	@RequestMapping("/new")
 	public ModelAndView newRegister() {
@@ -42,11 +45,11 @@ public class TitleController {
 			return REGISTER_VIEW;
 		}
 		try {
-			titles.save(title);
+			titleRegisterService.save(title);
 			attributes.addFlashAttribute("message", title.getDescription() + " has been stored with success!");
 			return "redirect:/titles/new"; 
-		} catch (DataIntegrityViolationException e) {
-			errors.rejectValue("expirationDate", null, "Invalid title date.");
+		} catch (IllegalArgumentException e) {
+			errors.rejectValue("expirationDate", null, e.getMessage());
 			return REGISTER_VIEW;
 		}
 
@@ -70,7 +73,7 @@ public class TitleController {
 	
 	@RequestMapping(value="{id}", method=RequestMethod.DELETE)
 	public String remove(@PathVariable Long id, RedirectAttributes attr) {
-		titles.delete(id);
+		titleRegisterService.remove(id);
 		
 		attr.addFlashAttribute("message", "Title has been removed with success!");
 		return "redirect:/titles";
