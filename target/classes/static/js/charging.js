@@ -18,4 +18,27 @@ $('#confirmRemoveModal').on('show.bs.modal', function(event) {
 $(function() {
 	$('[rel="tooltip"]').tooltip();
 	$('.js-currency').maskMoney({decimal: ',', thousands: '.', allowZero: true});
+	
+	$('.js-refresh-status').on('click', function(event) {
+		event.preventDefault();
+		var receiveBtn = $(event.currentTarget);
+		var urlReceive = receiveBtn.attr('href');
+		
+		var response = $.ajax({
+			url: urlReceive,
+			type: 'PUT'
+		});
+		
+		response.done(function(e) {
+			var titleId = receiveBtn.data('id');
+			console.log(titleId);
+			$('[data-role=' + titleId + ']').html('<span class="label label-success">' + e + '</span>');
+			receiveBtn.hide();
+		});
+		
+		response.fail(function(e) {
+			console.log(e);
+			alert('An error has been occurred when tying to update status');
+		});
+	});
 });

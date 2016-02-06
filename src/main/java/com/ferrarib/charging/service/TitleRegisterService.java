@@ -5,6 +5,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.ferrarib.charging.model.Title;
+import com.ferrarib.charging.model.TitleStatus;
 import com.ferrarib.charging.repository.Titles;
 
 @Service
@@ -23,6 +24,14 @@ public class TitleRegisterService {
 
 	public void remove(Long id) {
 		titles.delete(id);
+	}
+
+	public String receive(Long id) {
+		Title title = titles.findOne(id);
+		title.setStatus(TitleStatus.RECEIVED);
+		titles.save(title);
+		
+		return TitleStatus.RECEIVED.getDescription();
 	}
 	
 }

@@ -37,7 +37,7 @@
 						<td th:text="${title.description}"></td>
 						<td class="text-center" th:text="${{title.expirationDate}}"></td>
 						<td class="text-right" th:text="|R$ ${{title.amount}}|"></td>
-						<td class="text-center">
+						<td class="text-center" th:attr="data-role=${title.id}">
 							<span class="label" th:text="${title.status.description}"
 								th:classappend="${(title.pending) ? 'label-danger' : 'label-success'}"></span>
 						</td>
@@ -51,6 +51,11 @@
 								th:attr="data-id=${title.id}, data-description=${title.description}" title="Remove"
 								rel="tooltip" data-placement="top">
 								<span class="glyphicon glyphicon-remove"></span>
+							</a>
+							<a class="btn btn-link btn-xs js-refresh-status" th:if="${title.pending}" 
+								th:attr="data-id=${title.id}"
+								title="Receive" rel="tooltip" data-placement="top" th:href="@{/titles/{id}/receive(id=${title.id})}">
+								<span class="glyphicon glyphicon-check"></span>
 							</a>
 						</td>
 					</tr>
