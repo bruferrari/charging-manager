@@ -37,51 +37,53 @@
 				</div>
 			</form>
 		
-			<table class="table table-bordered table-striped">
-				<thead>
-					<tr>
-						<th class="text-center col-md-1">#</th>
-						<th>Description</th>
-						<th class="text-center col-md-2">Due Date</th>
-						<th class="text-right col-md-2">Amount</th>
-						<th class="text-center col-md-2">Status</th>
-						<th class="col-md-1"></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="title : ${titles}">
-						<td class="text-center" th:text="${title.id}"></td>
-						<td th:text="${title.description}"></td>
-						<td class="text-center" th:text="${{title.expirationDate}}"></td>
-						<td class="text-right" th:text="|R$ ${{title.amount}}|"></td>
-						<td class="text-center" th:attr="data-role=${title.id}">
-							<span class="label" th:text="${title.status.description}"
-								th:classappend="${(title.pending) ? 'label-danger' : 'label-success'}"></span>
-						</td>
-						<td class="text-center">
-							<a class="btn btn-link btn-xs" th:href="@{/titles/{id}(id=${title.id})}" title="Edit" 
-								rel="tooltip" data-placement="top">
-								<span class="glyphicon glyphicon-pencil"></span>
-							</a>
-							
-							<a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmRemoveModal"
-								th:attr="data-id=${title.id}, data-description=${title.description}" title="Remove"
-								rel="tooltip" data-placement="top">
-								<span class="glyphicon glyphicon-remove"></span>
-							</a>
-							<a class="btn btn-link btn-xs js-refresh-status" th:if="${title.pending}" 
-								th:attr="data-id=${title.id}"
-								title="Receive" rel="tooltip" data-placement="top" th:href="@{/titles/{id}/receive(id=${title.id})}">
-								<span class="glyphicon glyphicon-check"></span>
-							</a>
-						</td>
-					</tr>
-				
-					<tr>
-						<td colspan="6" th:if="${#lists.isEmpty(titles)}">No records found</td>
-					</tr>
-				</tbody>
-			</table>		
+			<div class="table-responsive">
+				<table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th class="text-center col-md-1">#</th>
+							<th>Description</th>
+							<th class="text-center col-md-2">Due Date</th>
+							<th class="text-right col-md-2">Amount</th>
+							<th class="text-center col-md-2">Status</th>
+							<th class="col-md-1"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="title : ${titles}">
+							<td class="text-center" th:text="${title.id}"></td>
+							<td th:text="${title.description}"></td>
+							<td class="text-center" th:text="${{title.expirationDate}}"></td>
+							<td class="text-right" th:text="|R$ ${{title.amount}}|"></td>
+							<td class="text-center" th:attr="data-role=${title.id}">
+								<span class="label" th:text="${title.status.description}"
+									th:classappend="${(title.pending) ? 'label-danger' : 'label-success'}"></span>
+							</td>
+							<td class="text-center">
+								<a class="btn btn-link btn-xs" th:href="@{/titles/{id}(id=${title.id})}" title="Edit" 
+									rel="tooltip" data-placement="top">
+									<span class="glyphicon glyphicon-pencil"></span>
+								</a>
+								
+								<a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmRemoveModal"
+									th:attr="data-id=${title.id}, data-description=${title.description}" title="Remove"
+									rel="tooltip" data-placement="top">
+									<span class="glyphicon glyphicon-remove"></span>
+								</a>
+								<a class="btn btn-link btn-xs js-refresh-status" th:if="${title.pending}" 
+									th:attr="data-id=${title.id}"
+									title="Receive" rel="tooltip" data-placement="top" th:href="@{/titles/{id}/receive(id=${title.id})}">
+									<span class="glyphicon glyphicon-check"></span>
+								</a>
+							</td>
+						</tr>
+					
+						<tr>
+							<td colspan="6" th:if="${#lists.isEmpty(titles)}">No records found</td>
+						</tr>
+					</tbody>
+				</table>	
+			</div>	
 		</div>
 		
 		
