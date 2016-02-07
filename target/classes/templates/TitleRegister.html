@@ -8,7 +8,7 @@
 </head>
 
 <section layout:fragment="content">
-	<form class="form-horizontal" method="POST" action="/titles" th:object="${title}">
+	<form class="form-horizontal" method="POST" th:action="@{/titles}" th:object="${title}">
 	
 		<div layout:include="DefaultMessage"></div>
 		<div layout:include="MessageError"></div>
@@ -17,7 +17,7 @@
 			<div class="panel-heading">
 				<div class="clearfix">
 					<h1 class="panel-title f-title-panel">New Title</h1>
-					<a class="btn btn-link f-link-panel" href="/titles">Back to search</a>
+					<a class="btn btn-link f-link-panel" th:href="@{/titles}">Back to search</a>
 				</div>
 			</div>
 			<div class="panel-body">
