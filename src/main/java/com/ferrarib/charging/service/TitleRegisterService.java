@@ -1,5 +1,7 @@
 package com.ferrarib.charging.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.ferrarib.charging.model.Title;
 import com.ferrarib.charging.model.TitleStatus;
 import com.ferrarib.charging.repository.Titles;
+import com.ferrarib.charging.repository.filter.TitleFilter;
 
 @Service
 public class TitleRegisterService {
@@ -34,4 +37,8 @@ public class TitleRegisterService {
 		return TitleStatus.RECEIVED.getDescription();
 	}
 	
+	public List<Title> filter(TitleFilter filter) {
+		String desc = filter.getDescription() == null ? "%" : filter.getDescription();
+		return titles.findByDescriptionContaining(desc);
+	}
 }

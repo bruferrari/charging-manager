@@ -17,7 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ferrarib.charging.model.Title;
 import com.ferrarib.charging.model.TitleStatus;
-import com.ferrarib.charging.repository.Titles;
+import com.ferrarib.charging.repository.filter.TitleFilter;
 import com.ferrarib.charging.service.TitleRegisterService;
 
 @Controller
@@ -25,9 +25,6 @@ import com.ferrarib.charging.service.TitleRegisterService;
 public class TitleController {
 	
 	private static final String REGISTER_VIEW = "TitleRegister";
-	
-	@Autowired
-	private Titles titles;
 	
 	@Autowired
 	private TitleRegisterService titleRegisterService;
@@ -57,11 +54,12 @@ public class TitleController {
 	}
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public ModelAndView search() {
-		List<Title> allTitles = titles.findAll();
+	public ModelAndView search(@ModelAttribute("filter") TitleFilter filter) {
+		
+		List<Title> result = titleRegisterService.filter(filter);
 		
 		ModelAndView mv = new ModelAndView("SearchTitles");
-		mv.addObject("titles", allTitles);
+		mv.addObject("titles", result);
 		return mv;
 	}
 	
@@ -83,8 +81,7 @@ public class TitleController {
 	@RequestMapping(value="/{id}/receive", method=RequestMethod.PUT)
 	public @ResponseBody String receive(@PathVariable Long id) {
 		System.out.println(">>> id: " + id);
-		titleRegisterService.receive(id);
-		return TitleStatus.RECEIVED.getDescription();
+		return titleRegisterService.receive(id);
 	}
 	
 	@ModelAttribute("allTitleStatuses")
